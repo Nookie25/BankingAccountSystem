@@ -1,4 +1,4 @@
-/**Name:Sean Jeffrey B. Fung
+/**Name:Sean Jeffrey B. Fung,
  **Section: A
  **Date: 02-25-2019
  **Description: This Program is A Banking System with features for the Client and Admin.
@@ -10,7 +10,11 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 public class Main {
 	
-	//method for Saving List of Accounts
+	/*
+	 * @method WriteToFile - method for Saving List of Accounts
+	 * @param Accountlist list - 
+	 * @return void
+	 */
 	private static void WriteToFile(AccountList list){
 		  try {
 		    FileOutputStream fos = new FileOutputStream ("list.txt");
@@ -23,7 +27,11 @@ public class Main {
 		  }
 		}
 	
-	//method for Loading List of Accounts
+	/*
+	 * @method ReadFromFile - reads or loads the linked list with the accounts saved by the system
+	 * @param 
+	 * @return o_userdata - LinkedList objects containing the Accounts and it's data
+	 */
 	private static AccountList ReadFromFile(){
 		  AccountList o_userdata = new AccountList();
 		  try {
@@ -41,25 +49,21 @@ public class Main {
 		  } 
 		  return o_userdata;
 		}
-
+	
+	// Main method of the project
 	public static void main(String[] args) throws Exception {
 		Scanner input = new Scanner(System.in);
 		System.out.println("CCA BANKING SYSTEM");
 		int search;
+		
 		AccountList list;
 		//Loads the List File if it exists
 		list = ReadFromFile();
 		
 		boolean loop = false;
 		do{
-			
-			System.out.println();
-			System.out.println("Welcome! Please choose an option. . .");
-			System.out.println();
-			System.out.println("0 - Close Program");
-			System.out.println("1 - Log in as Client");
-	        System.out.println("2 - Log in as Server");
-	        
+			CallMenu.Login();													//Menu to display log in choice 
+	  
 			int choice = input.nextInt();
 			
 			
@@ -92,15 +96,13 @@ public class Main {
 								boolean clientloop2 = true;
 								
 								do {
-									System.out.println();
-									System.out.println("0 - Deposit");
-									System.out.println("1 - Withdraw");
-									System.out.println("2 - Transfer Funds to Another Account");
-									System.out.println("3 - Inquire Balance");
-									System.out.println("4 - Recent Transactions");
-									System.out.println("5 - Back");
+						
+									CallMenu.ClientActions();					//Menu to choose a client action
+								
 									int clientchoice = input.nextInt();
 									
+									
+									//Performs action based on user choice
 									switch (clientchoice) {
 									case 0:
 										float value;
@@ -189,9 +191,8 @@ public class Main {
 											}while(infGetClientBalance);
 										pause();
 										break;
+									
 									case 4:
-										
-									case 5:
 										clientloop2 = false;
 										break;
 									default:
@@ -213,18 +214,13 @@ public class Main {
 				
 					boolean loop2 = false;
 					do{
-						System.out.println();
-						System.out.println("0 - Open Account");
-						System.out.println("1 - Close Account");
-						System.out.println("2 - Transfer Funds");
-						System.out.println("3 - Show List of Accounts");
-						System.out.println("4 - Search for an Account");
-						System.out.println("5 - Show Balance");
-						System.out.println("6 - Show Name of Account Owner");
-						System.out.println("7 - Save Updates");
-						System.out.println("8 - Back");
+						
+						CallMenu.AdminActions();															//Menu to choose an admin action
+						
 						int adminchoice = input.nextInt();
-					
+						
+						
+						//Performs action based on user choice
 						switch (adminchoice) {
 							case 0: 
 								System.out.println("Please Fill Up Account information. . .");
@@ -241,7 +237,7 @@ public class Main {
 										break;
 									}
 									System.out.println("Balance:");
-									int addbal = input.nextInt();
+									float addbal = input.nextFloat();
 									if(addbal < 0) {
 										System.out.println("Cannot Add Negative Balance!");
 										System.out.println();
@@ -334,13 +330,10 @@ public class Main {
 									pause();
 									break;
 								}else
-									System.out.println("0 - Show List of Accounts");
-									System.out.println("1 - Sort By Name (A-Z)");
-									System.out.println("2 - Sort By Balance (Low to High)");
-									System.out.println("3 - Sort By Balance (High to Low)");
-									System.out.println("4 - Sort By ID");
-									System.out.println("5 - Get the Current Size of the List");
-									System.out.println("6 - Back");
+									
+																								//Menu to display choices the desired action for sorting/
+																								//displaying list of accounts currently in the system
+									CallMenu.SortMenu();
 									int sortchoice = input.nextInt();
 									switch (sortchoice) {
 										case 0:		
@@ -501,7 +494,11 @@ System.out.println("Thank you for using CCA BANKING SYSTEM");
 	
 	}
 
-	
+	/*
+	 * @method pause - this enables the program to stop and wait for the user's cue to continue the program
+	 * @param 
+	 * @return void
+	 */
 	public static void pause(){
 		Scanner pause = new Scanner(System.in);
 		System.out.print("Press enter to continue . . .");
