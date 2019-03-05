@@ -1,4 +1,4 @@
-//Node for Linked List
+//Node for Account Linked List
 import java.io.Serializable;
 public class ListNode implements Serializable{
 	public Account info;

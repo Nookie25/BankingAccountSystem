@@ -1,4 +1,12 @@
+import java.io.Serializable;
+public class Transaction implements Serializable {
 
-public class Transaction {
-
+		int TransactionType;
+		int Order = 0;
+		
+		public Transaction (int Action, int Ord) {
+			
+			TransactionType = Action;
+			Order = Ord;
+		}
 }
