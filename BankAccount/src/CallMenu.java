@@ -2,7 +2,7 @@
 public class CallMenu {
 
 	/*
-	 * @Method Login outputs the login options for the user
+	 *Method Login outputs the login options for the user
 	 */
 	public static void Login () {
 		System.out.println();
@@ -14,7 +14,7 @@ public class CallMenu {
 	}
 	
 	/*
-	 * @Method ClientActions outputs the client's activity options
+	 *Method ClientActions outputs the client's activity options
 	 */
 	public static void ClientActions() {
 		
@@ -27,7 +27,7 @@ public class CallMenu {
 	}
 	
 	/*
-	 * @Method AdminActions outputs the choices for the admin
+	 *Method AdminActions outputs the choices for the admin
 	 */
 	public static void AdminActions() {
 		System.out.println();
@@ -43,7 +43,7 @@ public class CallMenu {
 	}
 	
 	/*
-	 * @Method SortMenu outputs the different sorting options and activities of the List of accounts for the admin
+	 *Method SortMenu outputs the different sorting options and activities of the List of accounts for the admin
 	 */
 	public static void SortMenu() {
 

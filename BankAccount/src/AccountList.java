@@ -17,18 +17,17 @@ protected ListNode tail;
 	public AccountList() {
 		head = tail = null;
 	}
-	/*
-	 * @method GetListSize - this gets the number of accounts created
-	 * @param none
-	 * @returns ListSize - the number of accounts in the list
+	/**
+	 * method GetListSize - this gets the number of accounts created
+	 * @return ListSize - the number of accounts in the list
 	 */
 	public int GetListSize() {
 		return ListSize;
 	}
-	/*
-	 * @method isEmpty -  This method checks if the list is Empty
-	 * @param none
-	 * @returns true if list isEmpty
+	/**
+	 * method isEmpty -  This method checks if the list is Empty
+	 * @return true if list isEmpty
+	 * @return false if list is not empty
 	 */
 	public boolean isEmpty() {
 		if(head==null) {
@@ -37,8 +36,8 @@ protected ListNode tail;
 			return false;
 	}
 	
-	/*
-	 * @method Deposit - this method enables the user to add money to his/her account
+	/**
+	 * method Deposit - this method enables the user to add money to his/her account
 	 * @param accnum - the account number input by the user
 	 * @param value - the desired number of money to deposit by the user
 	 * @return value - the amount deposited by the user
@@ -53,8 +52,8 @@ protected ListNode tail;
 			fromACC.Balance = fromACC.Balance + value;
 			return value;
 	}
-	/*
-	 * @method Withdraw - this allows the user to get money from his/her account
+	/**
+	 * method Withdraw - this allows the user to get money from his/her account
 	 * @param accnum - account number input by the user
 	 * @param value - the desired amount to be withdrawn by the user
 	 * @return value - the amount withdrawn  
@@ -69,8 +68,8 @@ protected ListNode tail;
 			fromACC.Balance = fromACC.Balance - value;
 			return value;
 	}
-	/*
-	 * @method GetBalance - the method allows the user to input his/her account number then outputs the account's total balance
+	/**
+	 * method GetBalance - the method allows the user to input his/her account number then outputs the account's total balance
 	 * @param accnum - account number input by the user
 	 * @return temp2.info.Balance - the total balance of the user 
 	 */
@@ -80,9 +79,8 @@ protected ListNode tail;
 		return temp2.info.Balance;
 	}
 	
-	/*
-	 * @method CreateIntArray - creates an int array to store the ID contents of the Account linked list
-	 * @param 
+	/**
+	 * method CreateIntArray - creates an int array to store the ID contents of the Account linked list
 	 * @return SortedArrayID - the sorted account numbers in ascending order
 	 */
 	public int [] CreateIntArray() {
@@ -93,8 +91,8 @@ protected ListNode tail;
 		return SortedArrayID;
 	}
 	
-	/*
-	 * @method PrintSortInt - transfers the linked list to an array and sorts it according to ID number directly using insertion sort
+	/**
+	 * method PrintSortInt - transfers the linked list to an array and sorts it according to ID number directly using insertion sort
 	 * @param array - array with the linked list data
 	 * @return array - a list of account numbers in order
 	 */
@@ -120,9 +118,8 @@ protected ListNode tail;
         return array;
     } 
 	
-    /*
-     * @method CreateNameSortArray - bubble sort for sorting Account by Name (A - Z)
-     * @param 
+    /**
+     * method CreateNameSortArray - bubble sort for sorting Account by Name (A - Z)
      * @return SortedArrayAccount - a list of names in order
      */
 	public Account[] CreateNameSortArray() {
@@ -142,9 +139,8 @@ protected ListNode tail;
 		}
 		return SortedArrayAccount;
 	}
-    /*
-     * @method CreateBalanceSortArray - insertion sort for sorting Account by Balance (Low to High)
-     * @param 
+    /**
+     * method CreateBalanceSortArray - insertion sort for sorting Account by Balance (Low to High)
      * @return SortedArrayAccount - the accounts in ascending order according to balance
      */
 	public Account [] CreateBalanceSortArray() {
@@ -166,8 +162,8 @@ protected ListNode tail;
 	    } 
 		
 	
-	/*
-	 * @method ListToArray - transfer the linked list to an array
+	/**
+	 * method ListToArray - transfer the linked list to an array
 	 * @param array - the array that will receive the information of the linked list
 	 * @return array - the array that is filled with the data of the linked list
 	 */
@@ -181,8 +177,8 @@ protected ListNode tail;
 	}
 	
 	
-   /*
-    * @method GetName - Gets the Name of the entered account number
+   /**
+    * method GetName - Gets the Name of the entered account number
     * @param accnum - account number input by the user
     * @return temp2.info.Name - name of the account number 
     */
@@ -192,10 +188,9 @@ protected ListNode tail;
 		return temp2.info.Name;
 	}
 	
-	/*
-	 * @method AddAccount - enables the user to add an account
+	/**
+	 * method AddAccount - enables the user to add an account
 	 * @param add - the account to be added
-	 * @return void
 	 */
 	public void AddAccount(Account add) {
 		if (!isEmpty()){
@@ -205,8 +200,8 @@ protected ListNode tail;
 		ListSize++;
 	}
 	
-	/*
-	 * @method DeleteAccount - enables the user to remove a created account
+	/**
+	 * method DeleteAccount - enables the user to remove a created account
 	 * @param accnum - account number input by the user
 	 * @return del - returns the deleted account
 	 */
@@ -235,8 +230,8 @@ protected ListNode tail;
 			ListSize--;
 		return del;
 	}
-	/*
-	 * @method InList - helps the user find an account number in the list
+	/**
+	 * method InList - helps the user find an account number in the list
 	 * @param accnum - account number input by the user
 	 * @return temp2 - if the input account number by the user has a match in the list, temp2 returns true otherwise, false.
 	 */
@@ -245,24 +240,23 @@ protected ListNode tail;
 		for (temp2 = head; temp2 != null && temp2.info.AccNum != accnum; temp2 = temp2.next);
 		return temp2 != null;
 	}
-	/*
-	 * @method account PrintInLst - this method inputs a number and outputs the information of the object Account
-	 * @param int accnum - is the account number sent by the user
-	 * @returns temp2.info - prints the information of the specified account number
+	/**
+	 * method account PrintInLst - this method inputs a number and outputs the information of the object Account
+	 * @param accnum - is the account number sent by the user
+	 * @return temp2.info - prints the information of the specified account number
 	 */
 	public Account PrintInList(int accnum) {
 		ListNode temp2;
 		for (temp2 = head; temp2 != null && temp2.info.AccNum != accnum; temp2 = temp2.next);
-		System.out.printf( "Name: " +"\t"+ temp2.info.Name  +"\t\t"+  "Account Number: " +"\t"+ temp2.info.AccNum +"\t"+ " Balance: " +"\t"+ Billion.format(temp2.info.Balance));
-		System.out.println();
+		System.out.printf("%-55s %-45s %-45s\n", temp2.info.Name  , temp2.info.AccNum , Billion.format(temp2.info.Balance));
 		return temp2.info;
 	}
 	
-	/*
-	 * @method Transfer - this method enables the user to transfer transactions in between two accounts
+	/**
+	 * method Transfer - this method enables the user to transfer transactions in between two accounts
 	 * @param from - account number of the source account
 	 * @param to - account number of the destination account 
-	 * @returns void
+	 * @param amount - amount of money to transfer
 	 */
 	public void Transfer(int from, int to, float amount) {
 		Account fromACC = null;
@@ -282,15 +276,14 @@ protected ListNode tail;
 			fromACC.Balance = fromACC.Balance - amount;
 			toACC.Balance = toACC.Balance + amount;
 	}
-	/*
-	 *@method PrintAll - this method prints all accounts according to chronological order of creation
-	 *@param none
-	 *@returns void
+	/**
+	 *method PrintAll - this method prints all accounts according to chronological order of creation
 	 */
 	public void PrintAll() {
+		System.out.printf("%-50s %-50s %-50s\n", "Name", "Account Number", "Balance");
 		for (ListNode temp = head; temp != null; temp = temp.next) {
-			System.out.printf( "Name: " +"\t"+ temp.info.Name  +"\t\t"+  "Account Number: " +"\t"+ temp.info.AccNum +"\t"+ " Balance: " +"\t"+ Billion.format(temp.info.Balance));
-			System.out.println();
+			System.out.printf("%-55s %-45s %-45s\n", temp.info.Name  , temp.info.AccNum , Billion.format(temp.info.Balance));
+		
 		}
 			
 		
@@ -300,5 +293,4 @@ protected ListNode tail;
 
 
 }
-	
 
