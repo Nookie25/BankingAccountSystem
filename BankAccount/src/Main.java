@@ -1,18 +1,19 @@
-/**Name:Sean Jeffrey B. Fung,
+/**@author Sean Jeffrey B. Fung, Jose Paolo P. Paredes, Kenneth Allan O. Cuarteros
  **Section: A
  **Date: 02-25-2019
- **Description: This Program is A Banking System with features for the Client and Admin.
+ **Description: This Program is A Banking System with features for the Client and Admin with support of File Reading and Writing
  */
 import java.util.Scanner;
 import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
+import java.text.DecimalFormat;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 public class Main {
 	
-	/*
-	 * @method WriteToFile - method for Saving List of Accounts
-	 * @param Accountlist list - 
+	/**
+	 * method WriteToFile - method for Saving List of Accounts
+	 * @param Accountlist list - The list of accounts with a linked list structure.
 	 * @return void
 	 */
 	private static void WriteToFile(AccountList list){
@@ -27,10 +28,9 @@ public class Main {
 		  }
 		}
 	
-	/*
-	 * @method ReadFromFile - reads or loads the linked list with the accounts saved by the system
-	 * @param 
-	 * @return o_userdata - LinkedList objects containing the Accounts and it's data
+	/**
+	 * method ReadFromFile - reads or loads the linked list with the accounts saved by the system
+	 * @return o_userdata - LinkedList objects containing the Accounts and its data
 	 */
 	private static AccountList ReadFromFile(){
 		  AccountList o_userdata = new AccountList();
@@ -54,6 +54,7 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		Scanner input = new Scanner(System.in);
 		System.out.println("CCA BANKING SYSTEM");
+		DecimalFormat Billion = new DecimalFormat("##0.####"); // Allow Digits more than 100 million
 		int search;
 		
 		AccountList list;
@@ -88,6 +89,7 @@ public class Main {
 								System.out.println();
 							}else {
 								System.out.println("Entered Account Found");
+								System.out.printf("%-50s %-50s %-50s\n", "Name", "Account Number", "Balance");
 								list.PrintInList(search);
 								System.out.println();
 								pause();
@@ -104,7 +106,7 @@ public class Main {
 									
 									//Performs action based on user choice
 									switch (clientchoice) {
-									case 0:
+									case 0:										//Deposit
 										float value;
 										float deposited;
 										boolean infDeposit = true;
@@ -113,7 +115,7 @@ public class Main {
 											value = input.nextFloat();
 												deposited = list.Deposit(search, value);
 												System.out.println("Successfully Deposited Amount: " );
-												System.out.println(deposited);
+												System.out.println(Billion.format(deposited));
 												System.out.println();
 												infDeposit = false;
 										}while(infDeposit);
@@ -121,7 +123,7 @@ public class Main {
 										pause();
 										break;
 										
-									case 1:
+									case 1:										//Withdraw
 										float fromBal1;
 										float value1;
 										float withdrawed;
@@ -133,7 +135,7 @@ public class Main {
 											if(fromBal1 > 0 && value1 <= fromBal1) {
 												withdrawed = list.Withdraw(search, value1);
 												System.out.println("Successfully Withdrawed Amount: " );
-												System.out.println(withdrawed);
+												System.out.println(Billion.format(withdrawed));
 												System.out.println();
 												infWithdraw = false;
 											}else
@@ -145,7 +147,7 @@ public class Main {
 										pause();
 										break;
 										
-									case 2:
+									case 2:										//Fund Transfer
 										int ClientFund = search;
 										boolean infTransferFunds = true;
 										boolean to   = false;
@@ -180,19 +182,19 @@ public class Main {
 										pause();
 										break;
 										
-									case 3:
+									case 3:									//Inquire Balance
 										boolean infGetClientBalance = true;
 										float ShowBal = 0;
 										do {
 												ShowBal = list.GetBalance(search);
-												System.out.println("Balance of Your Account is "+ ShowBal);
+												System.out.println("Balance of Your Account is "+ Billion.format(ShowBal));
 												System.out.println();
 												infGetClientBalance = false;
 											}while(infGetClientBalance);
 										pause();
 										break;
 									
-									case 4:
+									case 4:									//Go Back
 										clientloop2 = false;
 										break;
 									default:
@@ -222,9 +224,9 @@ public class Main {
 						
 						//Performs action based on user choice
 						switch (adminchoice) {
-							case 0: 
+							case 0: 										//Open Account
 								System.out.println("Please Fill Up Account information. . .");
-								System.out.println("Surname:");
+								System.out.println("Enter First Name - Middle Initial. - Last Name:");
 								String addname;
 								input.nextLine();
 								addname = input.nextLine();
@@ -252,7 +254,7 @@ public class Main {
 								pause();
 								break;
 								
-							case 1: 
+							case 1: 										//Close Account
 								boolean infDeleteAccount = true;
 								boolean DelExist = false;
 								Account result;
@@ -279,7 +281,7 @@ public class Main {
 								pause();
 								break;
 								
-							case 2: 
+							case 2: 										//Transfer Funds from one account to another
 								boolean infTransferFunds = true;
 								boolean from = false;
 								int fromID   = 0;
@@ -322,7 +324,7 @@ public class Main {
 								WriteToFile(list);
 								pause();
 								break;
-							case 3:
+							case 3:										//Open Sort and Print List Options
 								boolean loop3 = false;
 								do{
 								if(list.isEmpty()) {
@@ -336,7 +338,7 @@ public class Main {
 									CallMenu.SortMenu();
 									int sortchoice = input.nextInt();
 									switch (sortchoice) {
-										case 0:		
+										case 0:										//Show all accounts
 											System.out.println("Accounts in System:");
 											System.out.println();
 											list.PrintAll();
@@ -344,10 +346,12 @@ public class Main {
 											pause();
 											break;
 											
-										case 1:
+										case 1:										//Bubble Sort By Name
 											Account [] SearchAccountArray0 = new Account [list.GetListSize()];
 											System.out.println("Accounts Ordered By Name:");
+											System.out.println();
 											SearchAccountArray0	= list.CreateNameSortArray();
+											System.out.printf("%-50s %-50s %-50s\n", "Name", "Account Number", "Balance");
 											for(int i = 0 ; i != list.GetListSize(); i++) {
 												list.PrintInList(SearchAccountArray0[i].AccNum);
 											}
@@ -355,10 +359,12 @@ public class Main {
 											pause();
 											break;
 											
-										case 2:
+										case 2:										//Insertion Sort by Balance (Low to High)
 											Account [] SearchAccountArray = new Account [list.GetListSize()];
 											System.out.println("Accounts Ordered By Balance (Low to High):");
+											System.out.println();
 											SearchAccountArray	= list.CreateBalanceSortArray();
+											System.out.printf("%-50s %-50s %-50s\n", "Name", "Account Number", "Balance");
 											for(int i = 0 ; i != list.GetListSize(); i++) {
 												list.PrintInList(SearchAccountArray[i].AccNum);
 											}
@@ -366,10 +372,12 @@ public class Main {
 											pause();
 											break;
 											
-										case 3:
+										case 3:										//Reverse of Low to High Insertion Sort
 											Account [] SearchAccountArray2 = new Account [list.GetListSize()];
 											System.out.println("Accounts Ordered By Balance (High to Low):");
+											System.out.println();
 											SearchAccountArray2	= list.CreateBalanceSortArray();
+											System.out.printf("%-50s %-50s %-50s\n", "Name", "Account Number", "Balance");
 											for(int i = ((list.GetListSize())-1) ; i != -1 ; i--) {
 												list.PrintInList(SearchAccountArray2[i].AccNum);
 											}
@@ -377,10 +385,12 @@ public class Main {
 											pause();
 											break;
 											
-										case 4:
+										case 4:										//Insertion Sort by ID
 											int [] SearchIDArray = new int [list.GetListSize()];
 											System.out.println("Accounts Ordered By ID:");
+											System.out.println();
 											SearchIDArray	= list.CreateIntArray();
+											System.out.printf("%-50s %-50s %-50s\n", "Name", "Account Number", "Balance");
 											for(int i = 0 ; i != list.GetListSize(); i++) {
 												list.PrintInList(SearchIDArray[i]);
 											}
@@ -388,7 +398,7 @@ public class Main {
 											pause();
 											break;
 											
-										case 5:
+										case 5:										//Get Size of List
 											System.out.println();
 											System.out.println("The number of registered accounts is: ");
 											System.out.println(list.GetListSize());
@@ -396,7 +406,7 @@ public class Main {
 											pause();
 											break;
 											
-										case 6:
+										case 6:										//Go Back
 											loop3 = true;
 											break;
 											
@@ -408,7 +418,7 @@ public class Main {
 								}while(!loop3);
 								break;
 								
-							case 4: 
+							case 4: 										//Search for Account using Linear Search
 								boolean infFindAccount = true;
 								boolean find;
 								do {
@@ -429,7 +439,7 @@ public class Main {
 									pause();
 									break;
 									
-							case 5:
+							case 5:										//Get Balance of Account
 								boolean infGetBalance = true;
 								boolean searchacc = false;
 								float ShowBal = 0;
@@ -449,7 +459,7 @@ public class Main {
 								pause();
 								break;
 								
-							case 6:
+							case 6:										//Linear Search for Account
 								boolean infGetName = true;
 								boolean searchname = false;
 								do {
@@ -466,13 +476,13 @@ public class Main {
 								}while (infGetName);
 								pause();
 								break;
-							case 7:
+							case 7:										//Save (Write to Data File)
 							    WriteToFile(list);
 							    System.out.println("Data Has Been Saved Manually!");
 							    System.out.println();
 								break;
 								
-							case 8:
+							case 8:										//Go Back
 								loop2 = true;
 								break;
 								
@@ -494,10 +504,8 @@ System.out.println("Thank you for using CCA BANKING SYSTEM");
 	
 	}
 
-	/*
-	 * @method pause - this enables the program to stop and wait for the user's cue to continue the program
-	 * @param 
-	 * @return void
+	/**
+	 * method pause - this enables the program to stop and wait for the user's cue to continue the program
 	 */
 	public static void pause(){
 		Scanner pause = new Scanner(System.in);
@@ -506,6 +514,3 @@ System.out.println("Thank you for using CCA BANKING SYSTEM");
 	}
 
 }	
-
-
-
